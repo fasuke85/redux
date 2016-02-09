@@ -4,7 +4,7 @@ import {
   REQUEST_POSTS, RECEIVE_POSTS
 } from '../actions'
 
-function selectedReddit(state = 'reactjs', action) {
+export function selectedReddit(state = 'reactjs', action) {
   switch (action.type) {
     case SELECT_REDDIT:
       return action.reddit
@@ -40,7 +40,7 @@ function posts(state = {
   }
 }
 
-function postsByReddit(state = { }, action) {
+export function postsByReddit(state = { }, action) {
   switch (action.type) {
     case INVALIDATE_REDDIT:
     case RECEIVE_POSTS:
@@ -57,5 +57,6 @@ const rootReducer = combineReducers({
   postsByReddit,
   selectedReddit
 })
+
 
 export default rootReducer
