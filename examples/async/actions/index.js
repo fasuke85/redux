@@ -6,9 +6,8 @@ export const SELECT_REDDIT = 'SELECT_REDDIT'
 export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
 
 const createActionCreator = (actionType, ...payloadNames) => (...payloads) => {
-    let payloadObjs = payloadNames
-      .map((name, index) => ({[name]: payloads[index]}));
-    return Object.assign({type: actionType}, ...payloadObjs);
+    let payloadObjs = payloadNames.map((name, index) => ({[name]: payloads[index]}));
+    return Object.assign({}, {type: actionType}, ...payloadObjs);
 };
 
 export const selectReddit = createActionCreator(SELECT_REDDIT, 'reddit');
@@ -35,11 +34,11 @@ function fetchPosts(reddit) {
     dispatch(requestPosts(reddit))
     return window.fetch(`http://www.reddit.com:80/r/${reddit}.json/`)
       .then(response => {
-        console.log("response",response);
+        // console.log("response",response);
         return response.json();
       })
       .then(json => {
-        console.log('json',json);
+        // console.log('json',json);
         return dispatch(receivePosts(reddit, json));
       })
   }
